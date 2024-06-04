@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desenhos Animados dos Anos 2000</title>
+  </head>
+  <body bgcolor="red">
+    <h1>Desenhos Animados dos Anos 2000</h1>
+    <ul class="lista-desenhos"></ul>
+    <input
+      type="text"
+      id="novo-desenho"
+      placeholder="Digite um novo desenho animado"
+    />
+    <button onclick="adicionarDesenho()">Adicionar Desenho</button>
+
+    <script>
+      // Array inicial de desenhos animados dos anos 2000
+      let desenhosAnimados =
+        // 1°Erro Estavam sendo usados parenteses em vez de colchetes, no array
+        [
+          "Bob Esponja",
+          "Os Padrinhos Mágicos",
+          "Kim Possible",
+          "As Aventuras de Jackie Chan",
+          "Hora de Aventura",
+          "Avatar: A Lenda de Aang",
+          // "Ben 10, 2°Erro -> não houve o fechameno das aspas
+          "Ben 10",
+          "X-Men: Evolution",
+          "Duck Dodgers",
+          "Danny Phantom",
+        ];
+
+      let indiceSubstituicao = 0;
+
+      function exibirLista() {
+        // const lista = document.getElementByClass("lista-desenhos");
+        const lista = document.querySelector(".lista-desenhos"); //3°Erro -> é necessário o queryselector para que possa ser identificado o elemento requerido, e o ponto antes da classe
+        lista.innerHTML = "";
+
+        desenhosAnimados.forEach((desenho) => {
+          // const item = document.createElement(li); 4°Erro -> estava faltando as aspas para identificar
+          const item = document.createElement("li");
+          item.textContent = desenho;
+          lista.appendChild(item);
+        });
+      }
+
+      // Função para adicionar um novo desenho
+      function adicionarDesenho() {
+        //const novoDesenho = document.getElementById("novo-desenho"); 5° Erro
+        const novoDesenho = document.getElementById("novo-desenho").value;
+        if (novoDesenho.trim() !== "") {
+          desenhosAnimados[indiceSubstituicao] = novoDesenho; // Substitui o elemento no índice atual
+          (indiceSubstituicao + 1) % desenhosAnimados.length; // Atualiza o índice para a próxima substituição
+          //exibirLista; 6° Erro -> estava faltando os parenteses, para localizar esta função
+          exibirLista(); // Atualiza a exibição da lista
+          document.getElementById("novo-desenho").value = ""; // Limpa o input
+        }
+      }
+
+      // Exibe a lista inicial quando a página carrega
+      // window.onload; -> 7° Erro -> A função para exibir a lista requerida, não foi chamada, sendo assim, ele não exibiria o que não lhe foi descrito, fazendo com que onload não consiga executar.
+      window.onload = function () {
+        exibirLista();
+      };
+    </script>
+    <style>
+      body {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+      }
+    </style>
+  </body>
+</html>
